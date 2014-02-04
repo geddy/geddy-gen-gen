@@ -1,0 +1,10 @@
+Geddy MVC generator generator. (Yes you've read correctly.)
+
+Generates a geddy generator for you.
+
+Usage:
+
+    geddy gen gen create[name,taskRunner]
+
+        name - Name of your generator
+        taskRunner - (default = "jake") Task runner the generator will use: jake, grunt, gulp

@@ -1,0 +1,33 @@
+<%
+var deps = {
+  jake: {
+    "utilities": "*",
+    "jake": "*"
+  },
+  grunt: {
+    "grunt": "*",
+    "grunt-cli": "*"
+  },
+  gulp: {
+    "gulp": "*"
+  }
+};
+%>
+{
+  "name": "geddy-gen-<%- genName %>",
+  "version": "0.0.1",
+  "description": "Experimental <%- genName %> generator for the geddy MVC framework.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "keywords": [
+    "geddy",
+    "Web",
+    "framework",
+    "REST",
+    "MVC"
+  ],
+  "dependencies": <% if (deps[taskRunner]) { %><%- JSON.stringify(deps[taskRunner]) %><% } else { %>{}<% } %>
+}

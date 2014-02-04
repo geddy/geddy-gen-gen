@@ -1,0 +1,24 @@
+{
+  "name": "geddy-gen-gen",
+  "version": "0.0.1",
+  "description": "Experimental generator generator for the geddy MVC framework.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ondrej Brinkel <info@anzui.de> (http://anzui.de)",
+  "contributors": [
+    "Matthew Eernisse <mde@fleegix.org> (http://fleegix.org)"
+  ],
+  "keywords": [
+    "geddy",
+    "Web",
+    "framework",
+    "REST",
+    "MVC"
+  ],
+  "dependencies": {
+    "utilities": "*",
+    "jake": "*"
+  }
+}

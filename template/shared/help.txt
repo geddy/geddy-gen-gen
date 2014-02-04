@@ -1,0 +1,2 @@
+Put your generator docs in here.
+They will be displayed when calling the "help" task of your generator.
