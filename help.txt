@@ -7,4 +7,8 @@ Usage:
     geddy gen gen create[name,taskRunner]
 
         name - Name of your generator
-        taskRunner - (default = "jake") Task runner the generator will use: jake, grunt, gulp
+        taskRunner - (default = "jake")
+                     Task runner the generator will use: jake, grunt, gulp, none
+
+                     use "none" here if your task runner is not supported
+                     or you prefer plain node.js instead.

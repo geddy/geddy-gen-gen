@@ -31,7 +31,7 @@ task('default', {async: true}, function(genName, taskRunner) {
     taskRunner = taskRunner.toLowerCase();
   }
 
-  var supportedTaskRunners = ['jake', 'grunt', 'gulp'];
+  var supportedTaskRunners = ['jake', 'grunt', 'gulp', 'none'];
 
   if (supportedTaskRunners.indexOf(taskRunner) === -1) {
     fail('The task runner "' + taskRunner + '" is not supported.');
