@@ -1,5 +1,6 @@
 var fs = require('fs');
 var path = require('path');
+var appPath = process.env.appPath;
 
 module.exports = function(grunt) {
   grunt.initConfig({

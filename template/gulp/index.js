@@ -5,7 +5,10 @@ module.exports = function(appPath, args) {
 
   // start all the grunting
   var cmd = exec(path.join(__dirname, 'node_modules/gulp/bin/gulp.js ' + args.join(' ')), {
-    cwd: __dirname
+    cwd: __dirname,
+    env: {
+      appPath: appPath
+    }
   }, function() {
 
   });

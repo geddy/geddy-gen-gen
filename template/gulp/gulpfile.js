@@ -2,6 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
+var appPath = process.env.appPath;
 
 gulp.task('default', function() {
   // add your code here
