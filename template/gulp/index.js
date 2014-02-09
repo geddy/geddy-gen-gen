@@ -1,17 +1,12 @@
 var path = require('path');
+var gulp = require('gulp');
 
 module.exports = function(appPath, args) {
-  var exec = require('child_process').exec;
+  // load local gulpfile
+  var gulpFile = require('./gulpfile');
 
-  // start all the grunting
-  var cmd = exec(path.join(__dirname, 'node_modules/gulp/bin/gulp.js ' + args.join(' ')), {
-    cwd: __dirname,
-    env: {
-      appPath: appPath
-    }
-  }, function() {
+  var task = args[0] || 'default';
 
-  });
-  cmd.stdout.pipe(process.stderr);
-  cmd.stderr.pipe(process.stdout);
+  // start all the gulping
+  gulp.start([task]);
 }
