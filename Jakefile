@@ -1,6 +1,7 @@
 var fs = require('fs');
 var exec = require('child_process').exec;
 var path = require('path')
+  , utilities = require('utilities')
   , geddyPath = path.normalize(path.join(require.resolve('geddy'), '../../'));
 
 // Load the basic Geddy toolkit
@@ -15,6 +16,8 @@ var cwd = process.cwd()
 
 // Tasks
 task('default', {async: true}, function(genName, taskRunner) {
+  var self = this;
+
   if (!genName) {
     fail('Generator name missing.');
     return;
@@ -101,6 +104,7 @@ task('default', {async: true}, function(genName, taskRunner) {
 
     console.log('\ngenerated generator "' + genName + '" in ' + genPath);
     complete();
+    self.emit('done');
   });
   cmd.stderr.pipe(process.stderr);
   cmd.stdout.pipe(process.stdout);
@@ -113,4 +117,18 @@ task('help', function() {
       {encoding: 'utf8'}
     )
   );
+});
+
+testTask('Gens', ['clean'], function() {
+  this.testFiles.exclude('test/helpers/**');
+  this.testFiles.exclude('test/temp/**');
+  this.testFiles.include('test/**/*.js');
+});
+
+desc('Clears the test temp directory.');
+task('clean', function() {
+  console.log('Cleaning temp files ...');
+  var tmpDir = path.join(__dirname, 'test', 'tmp');
+  utilities.file.rmRf(tmpDir, {silent:true});
+  fs.mkdirSync(tmpDir);
 });

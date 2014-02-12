@@ -1,11 +1,11 @@
-module.exports = function(appPath, args) {
-  var jake = require('jake');
-  var path = require('path');
+var jake = require('jake');
+var path = require('path');
 
+module.exports = function(appPath, args) {
   var validTasks = ['default', 'help'];
 
   // keep support of old style gen syntax
-  if (args.length > 0 && validTasks.indexOf(args[0]) !== -1) {
+  if (args.length > 0 && validTasks.indexOf(args[0]) === -1) {
     args = ['default[' + args.join(',') + ']'];
   }
 
