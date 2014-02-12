@@ -14,6 +14,11 @@ var cwd = process.cwd()
   , genDirname = path.join(__dirname, '..');
 
 
+function getGenPath(genName)
+{
+  return path.join(process.cwd(), 'geddy-gen-' + genName);
+}
+
 // Tasks
 task('default', {async: true}, function(genName, taskRunner) {
   var self = this;
@@ -26,6 +31,22 @@ task('default', {async: true}, function(genName, taskRunner) {
   // sanitize the gen name
   genName = genName.toLowerCase().replace(/\s|_/g, '-');
 
+  // copy and parse template files
+  var t = jake.Task['copy-template'];
+  t.reenable();
+  t.invoke.call(t, genName, taskRunner);
+
+  // install node modules for generator
+  t = jake.Task['npm-install'];
+  t.reenable();
+  t.once('done', function() {
+    complete();
+    self.emit('done');
+  });
+  t.invoke.call(t, genName);
+});
+
+task('copy-template', function(genName, taskRunner) {
   if (!taskRunner) {
     taskRunner = 'jake';
     console.log('No task runner given, using "jake" ...');
@@ -42,7 +63,7 @@ task('default', {async: true}, function(genName, taskRunner) {
   }
 
   // create gen dir
-  var genPath = path.join(process.cwd(), 'geddy-gen-' + genName);
+  var genPath = getGenPath(genName);
   jake.mkdirP(genPath);
 
   // copy and parse shared templates
@@ -92,6 +113,17 @@ task('default', {async: true}, function(genName, taskRunner) {
       );
     }
   });
+});
+
+task('npm-install', {async: true}, function(genName) {
+  var self = this;
+
+  if (!genName) {
+    fail('Generator name missing.');
+    return;
+  }
+
+  var genPath = getGenPath(genName);
 
   // install node modules
   var cmd = exec('npm install', {
