@@ -153,7 +153,7 @@ task('help', function() {
 
 testTask('Gens', ['clean'], function() {
   this.testFiles.exclude('test/helpers/**');
-  this.testFiles.exclude('test/temp/**');
+  this.testFiles.exclude('test/tmp/**');
   this.testFiles.include('test/**/*.js');
 });
 
