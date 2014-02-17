@@ -22,6 +22,17 @@ function getGenPath(genName)
 // Tasks
 task('default', {async: true}, function(genName, taskRunner) {
   var self = this;
+  var t = jake.Task.create;
+  t.reenable();
+  t.once('done', function() {
+    complete();
+    self.emit('done');
+  });
+  t.invoke(genName, taskRunner);
+});
+
+task('create', {async: true}, function(genName, taskRunner) {
+  var self = this;
 
   if (!genName) {
     fail('Generator name missing.');
