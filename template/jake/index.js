@@ -8,6 +8,9 @@ module.exports = function(appPath, args) {
   if (args.length > 0 && validTasks.indexOf(args[0]) === -1) {
     args = ['default[' + args.join(',') + ']'];
   }
+  else if(args.length == 0) {
+    args = ['help'];
+  }
 
   // force to load local Jakefile and jakelib
   args.push('--jakefile');
