@@ -1,9 +1,8 @@
 var jake = require('jake');
 var path = require('path');
+var validTasks = ['default', 'help'];
 
 module.exports = function(appPath, args) {
-  var validTasks = ['default', 'help'];
-
   // keep support of old style gen syntax
   if (args.length > 0 && validTasks.indexOf(args[0]) === -1) {
     args = ['default[' + args.join(',') + ']'];
@@ -18,3 +17,11 @@ module.exports = function(appPath, args) {
   // run our tasks
   jake.run.apply(jake, args);
 }
+
+// make tasks available programaticly
+validTasks.forEach(function(task) {
+  module.exports[task] = function() {
+    var t = jake.Task.create;
+    t.invoke.apply(t, Array.prototype.slice.call(arguments));
+  }
+});
