@@ -8,7 +8,7 @@ require(path.join(geddyPath,'lib/geddy'));
 // Dependencies
 var cwd = process.cwd()
   , utils = require(path.join(geddyPath, 'lib/utils'))
-  , Adapter = require(path.join(geddyPath, 'lib/template/adapters')).Adapter
+  , genutils = require('geddy-genutils')
   , genDirname = path.join(__dirname, '..');
 
 var gulp = require('gulp');

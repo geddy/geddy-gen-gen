@@ -1,18 +1,14 @@
-var fs = require('fs');
-var exec = require('child_process').exec;
 var path = require('path')
+  , fs = require('fs')
+  , cwd = process.cwd()
   , utilities = require('utilities')
-  , geddyPath = path.normalize(path.join(require.resolve('geddy'), '../../'));
-
-// Load the basic Geddy toolkit
-require(path.join(geddyPath,'lib/geddy'));
-
-// Dependencies
-var cwd = process.cwd()
-  , utils = require(path.join(geddyPath, 'lib/utils'))
-  , Adapter = require(path.join(geddyPath, 'lib/template/adapters')).Adapter
+  , genutils = require('geddy-genutils')
+  , exec = require('child_process').exec
   , genDirname = __dirname;
 
+// Load the basic Geddy toolkit
+genutils.loadGeddy();
+var utils = genutils.loadGeddyUtils();
 
 function getGenPath(genName)
 {
@@ -85,18 +81,14 @@ task('copy-template', function(genName, taskRunner) {
     var ext = path.extname(sharedFile).toLowerCase();
 
     if (ext === '.ejs') {
-      var contents = fs.readFileSync(path.join(sharedPath, sharedFile), { encoding: 'utf8' });
-
-      var adapter = new Adapter({engine: 'ejs', template: contents});
-
-      fs.writeFileSync(
+      genutils.template.write(
+        path.join(sharedPath, sharedFile),
         path.join(genPath, path.basename(sharedFile, ext)),
-        adapter.render({
+        {
           genName: genName,
           genPath: genPath,
           taskRunner: taskRunner
-        }),
-        'utf8'
+        }
       );
     }
     else {

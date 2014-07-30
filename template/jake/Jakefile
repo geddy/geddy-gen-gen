@@ -1,16 +1,13 @@
-var fs = require('fs');
 var path = require('path')
-  , geddyPath = path.normalize(path.join(require.resolve('geddy'), '../../'));
-
-// Load the basic Geddy toolkit
-require(path.join(geddyPath,'lib/geddy'));
-
-// Dependencies
-var cwd = process.cwd()
-  , utils = require(path.join(geddyPath, 'lib/utils'))
-  , Adapter = require(path.join(geddyPath, 'lib/template/adapters')).Adapter
+  , fs = require('fs')
+  , cwd = process.cwd()
+  , utilities = require('utilities')
+  , genutils = require('geddy-genutils')
   , genDirname = __dirname;
 
+// Load the basic Geddy toolkit
+genutils.loadGeddy();
+var utils = genutils.loadGeddyUtils();
 
 // Tasks
 task('default', function() {

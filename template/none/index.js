@@ -1,5 +1,6 @@
 var path = require('path');
 var fs = require('fs');
+var genutils = require('geddy-genutils');
 
 module.exports = function(appPath, args) {
   if (args.length > 0 && args[0] === 'help') {
