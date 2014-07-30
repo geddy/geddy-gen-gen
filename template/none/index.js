@@ -15,4 +15,4 @@ module.exports = function(appPath, args) {
     // add your code here
     console.log('This is the default task of this generator.\nIt does nothing yet.');
   }
-}
+};

@@ -9,4 +9,4 @@ module.exports = function(appPath, args) {
 
   // start all the gulping
   gulp.start(task);
-}
+};
