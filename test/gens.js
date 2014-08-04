@@ -149,7 +149,7 @@ tests = {
       // execute default task
       console.log('executing default generator task ...');
       startLogWatch();
-      gen(null, []);
+      gen(null, ['default']);
 
       var logs = stopLogWatch();
       assert.equal(logs, defaultOut, 'default task has expected output');

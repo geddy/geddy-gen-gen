@@ -5,6 +5,8 @@ var path = require('path')
   , genutils = require('geddy-genutils')
   , genDirname = __dirname;
 
+var ns = 'myNamespace'; // TODO: insert your namespace here
+
 // Load the basic Geddy toolkit
 genutils.loadGeddy();
 var utils = genutils.loadGeddyUtils();
@@ -15,11 +17,13 @@ task('default', function() {
   console.log('This is the default task of this generator.\nIt does nothing yet.');
 });
 
-task('help', function() {
-  console.log(
-    fs.readFileSync(
-      path.join(__dirname, 'help.txt'),
-      {encoding: 'utf8'}
-    )
-  );
+namespace(ns, function() {
+  task('help', function() {
+    console.log(
+      fs.readFileSync(
+        path.join(__dirname, 'help.txt'),
+        {encoding: 'utf8'}
+      )
+    );
+  });
 });
